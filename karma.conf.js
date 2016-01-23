@@ -5,8 +5,8 @@ module.exports = function(config) {
     frameworks: ['jasmine', 'sinon'],
 
     files: [
-      'angular_class.coffee',
-      'angular_class_test.coffee',
+      'angular-class.coffee',
+      'angular-class-test.coffee',
     ],
 
     exclude: [],
