@@ -98,10 +98,10 @@ class MyApp.StatusCtrl < AngularClass
 
   app.controller('StatusCtrl', @factory())
 
-  @initialize: () ->
+  initialize: () ->
     @_http.get('/api/status').then(@_setStatus)
 
-  @_setStatus: (response) =>
+  _setStatus: (response) =>
     @_scope.status = response.result
 ```
 
