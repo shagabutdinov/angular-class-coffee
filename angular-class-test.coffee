@@ -48,3 +48,16 @@ describe 'AngularClass.classFactory', ->
     Helper.classFactory()[2]()
     expect(Helper._DEP1).toEqual(undefined)
 
+describe 'AngularClass.directive', ->
+
+  it 'should return function', ->
+    expect(typeof Helper.directive() == 'function').toEqual(true)
+
+  it 'should return function that returns object', ->
+    expect(typeof Helper.directive()()).toEqual('object')
+
+  it 'should return function that returns object with all properties set', ->
+    expect(Helper.directive()().helper).toEqual('HELPER')
+
+  it 'should return function that returns object with controller set', ->
+    expect(Helper.directive()().controller instanceof Array).toEqual(true)
