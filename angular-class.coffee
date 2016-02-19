@@ -1,10 +1,36 @@
 class @AngularClass
 
   @factory: () ->
-    return @_createFactory(() => return new this)
+    return @_createFactory(() =>
+      return new this()
+    )
 
   @classFactory: () ->
+    console.log('angular-class-coffee: @classFactory is deprecated; use ' +
+      '@class() instead')
+    return @class()
+
+  @class: () ->
     return @_createFactory(() => return (class extends this))
+
+  @directive: () ->
+    return (() =>
+      object = {}
+
+      for key, value of this
+        if key == '__super__'
+          continue
+
+        object[key] = value
+
+      object.controller = @factory()
+      object.link = ((_scope, element, _attrs, controller) ->
+        if controller.link
+          controller.link(element)
+      )
+
+      return object
+    )
 
   @_createFactory: (resultCallback) ->
     imports = this._import || []

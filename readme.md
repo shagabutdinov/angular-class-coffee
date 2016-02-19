@@ -25,7 +25,7 @@ Usage
 
 Basic usage:
 
-```
+```coffeescript
 # create class
 class MyApp.MyCtrl < AngularClass
 
@@ -52,7 +52,7 @@ class MyApp.MyCtrl < AngularClass
 
 Inheritance:
 
-```
+```coffeescript
 # inherit class from your own class
 class MyApp.MyChildCtrl < MyApp.MyCtrl
 
@@ -73,11 +73,37 @@ class MyApp.MyChildCtrl < MyApp.MyCtrl
     @_scope.status = response.result
 ```
 
+Directive:
+
+```coffeescript
+# create normal class
+class MyApp.MyChildCtrl < AngularClass
+
+  # import dependecies as normal ones
+  @_import: [
+    '$scope',
+    '$http',
+  ]
+
+  # set template url and scope to class
+  @templateUrl: '/link/to/template.html'
+  @scope: {
+    data: '=data',
+  }
+
+  # use @directive to specify the directive
+  app.directive('widgetTextEditor', @directive())
+
+  # use link to setup stuff on element
+  link: (element) ->
+    # link element here
+```
+
 
 Example
 -------
 
-```
+```coffeescript
 app.controller(['$scope', '$http', ($scope, $http) ->
   setStatus = ((response) ->
     $scope.status = response.result
@@ -85,10 +111,10 @@ app.controller(['$scope', '$http', ($scope, $http) ->
 
   $http.get('/api/status').then(setStatus)
 ])
-```
 
 Becomes:
 
+```coffeescript
 class MyApp.StatusCtrl < AngularClass
 
   @_import: [
