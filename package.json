@@ -1,7 +1,7 @@
 {
   "name": "angular-class-coffee",
   "description": "coffeescript classes support for angular",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "license": "MIT",
   "repository": {
@@ -25,5 +25,8 @@
     "karma-sinon": "^1.0.4",
     "phantomjs": "^1.9.19",
     "sinon": "^1.17.2"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/karma start --single-run"
   }
 }

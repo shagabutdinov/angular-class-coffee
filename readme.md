@@ -1,17 +1,20 @@
+[![Build Status](https://travis-ci.org/shagabutdinov/angular-class-coffee.svg?branch=master)](https://travis-ci.org/shagabutdinov/angular-class-coffee)
+
 Angular Class
 =============
 
 Coffeescript classes support for angular. Makes possible to use coffescript
 classes instead of callbacks in angular.
 
+![demo](https://cloud.githubusercontent.com/assets/1635613/16680398/04500d98-4510-11e6-8eea-b2903b9795c9.png)
 
 Features
 --------
 
-  * Classes are simpler than large callbacks
+  * Avoid dependecies duplication
+  * Classes easier to percept than large callbacks
   * Controllers/resources can be inherited; it is usefull for deduplication
   * It is easier to isolate classes and to do unit-testing
-  * There is no dependecies duplucation
 
 
 Installation
@@ -27,11 +30,7 @@ Basic usage:
 
 ```coffeescript
 # create class
-<<<<<<< HEAD
-class MyApp.MyCtrl < AngularClass
-=======
-class MyApp.MyCtrl extends AngularClass
->>>>>>> ca8046f... Update readme.md
+class App.MyCtrl extends AngularClass
 
   # add dependecies to @_import
   @_import = [
@@ -58,10 +57,10 @@ Inheritance:
 
 ```coffeescript
 # inherit class from your own class
-class MyApp.MyChildCtrl extends MyApp.MyCtrl
+class App.MyChildCtrl extends App.ParentCtrl
 
   # note that you should append dependencies
-  @_import = _.extend({}, MyApp.MyCtrl._import, [
+  @_import = App.ParentCtrl._import.concat([
     '$http',
   ])
 
@@ -81,7 +80,7 @@ Directive:
 
 ```coffeescript
 # create normal class
-class MyApp.MyChildCtrl < AngularClass
+class App.MyChildCtrl extends AngularClass
 
   # import dependecies as normal ones
   @_import: [
@@ -108,18 +107,19 @@ Example
 -------
 
 ```coffeescript
-app.controller(['$scope', '$http', ($scope, $http) ->
+app.controller('StatusCtrl', ['$scope', '$http', ($scope, $http) ->
   setStatus = ((response) ->
     $scope.status = response.result
   )
 
   $http.get('/api/status').then(setStatus)
 ])
+```
 
 Becomes:
 
 ```coffeescript
-class MyApp.StatusCtrl extends AngularClass
+class App.StatusCtrl extends AngularClass
 
   @_import: [
     '$scope',
